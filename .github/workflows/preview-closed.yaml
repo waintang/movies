@@ -1,0 +1,27 @@
+on: 
+  pull_request: 
+    types:
+      - closed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    
+    - name: Login
+      uses: okteto/actions/login@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        token: ${{ secrets.OKTETO_TOKEN }}
+
+    - name: Activate namespace
+      uses: okteto/actions/namespace@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        namespace: movies-preview-rberrelleza
+    
+    - name: Destroy Application
+      uses: okteto/actions/destroy-application@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        name: pr-${{ github.event.number }}
+        

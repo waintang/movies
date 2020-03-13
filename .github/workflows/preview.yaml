@@ -1,0 +1,45 @@
+on: 
+  pull_request: 
+    types:
+      - opened
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    
+    - name: Login
+      uses: okteto/actions/login@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        token: ${{ secrets.OKTETO_TOKEN }}
+
+    - name: Create namespace
+      uses: okteto/actions/create-namespace@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        namespace: movies-preview-rberrelleza
+    
+    - name: Deploy Application
+      uses: okteto/actions/deploy-application@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        application: movies
+        name: pr-${{ github.event.number }}
+
+    - name: Push API Changes
+      uses: okteto/actions/push@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        working-directory: api
+    - name: Push Frontend Changes
+      uses: okteto/actions/push@2ba1a5a20b8a29f60501584429db4c4c5a40e682
+      with:
+        working-directory: frontend
+    
+    - name: comment PR
+      uses: unsplash/comment-on-pr@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        msg: "Preview environment available at https://pr-${{ github.event.number }}-movies-preview-rberrelleza.cloud.okteto.net"
+        
+        
