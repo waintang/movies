@@ -1,5 +1,7 @@
 # Movies Sample app
 
+[![Deploy](https://okteto.com/develop-okteto.svg)](https://okteto.sf.okteto.net/deploy)
+
 This example shows how to leverage [Okteto](https://github.com/okteto/okteto) to develop a Node + React Sample App directly in Kubernetes. The Node + React Sample App is deployed using a [Helm 3  chart](https://github.com/okteto/charts/tree/master/movies). It creates the following components:
 
 - A *React* based front-end, using [webpack](https://webpack.js.org) as bundler and *hot-reload server* for development.
