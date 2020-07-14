@@ -1,5 +1,7 @@
 # Movies
 
+[![Deploy](https://okteto.com/develop-okteto.svg)](https://okteto.sf.okteto.net/deploy)
+
 This example shows how to leverage Okteto to deploy and develop a Node + React application in Kubernetes.
 
 This chart creates:
