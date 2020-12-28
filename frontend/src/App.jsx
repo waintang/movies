@@ -145,7 +145,7 @@ class Hero extends Component {
           <h1>Bohemian Rhapsody</h1>
           <p>
             Queen take the music world by storm when they form the rock &apos;n&apos; roll
-            band in 1970s.
+            band in 1970twps.
           </p>
           <div className="button-container">
             <HeroButton class="play-button">
